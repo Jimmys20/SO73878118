@@ -2,7 +2,7 @@
 
 namespace SO73878118.Data
 {
-    public class DateTimeModel : IValidatableObject
+    public class DateTimeModel //: IValidatableObject
     {
         [Required]
         public string? Name { get; set; }
@@ -13,14 +13,15 @@ namespace SO73878118.Data
 
         [Required]
         [DataType(DataType.Date)]
+        [DateMustBeAfter(nameof(FromDate))]
         public DateTime? ToDate { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (ToDate < FromDate)
-            {
-                yield return new ValidationResult("ToDate must be after FromDate", new[] { nameof(ToDate) });
-            }
-        }
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    if (ToDate < FromDate)
+        //    {
+        //        yield return new ValidationResult("ToDate must be after FromDate", new[] { nameof(ToDate) });
+        //    }
+        //}
     }
 }
