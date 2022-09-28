@@ -5,6 +5,9 @@ namespace SO73878118.Data
     public class DateTimeModel : IValidatableObject
     {
         [Required]
+        public string? Name { get; set; }
+
+        [Required]
         [DataType(DataType.Date)]
         public DateTime? FromDate { get; set; }
 

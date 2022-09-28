@@ -8,6 +8,14 @@
 
     <div style="padding-top:10px" class="col-md-4">
         <label>
+            Name:
+            <InputText @bind-Value="dateTimeModel.Name" />
+        </label>
+        <ValidationMessage For="@(() => dateTimeModel.Name)" />
+    </div>
+
+    <div style="padding-top:10px" class="col-md-4">
+        <label>
             From Date:
             <InputDate @bind-Value="dateTimeModel.FromDate" />
         </label>
