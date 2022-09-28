@@ -19,7 +19,7 @@ namespace SO73878118.Data
 
             if ((DateTime?)value < (DateTime?)model.GetType().GetProperty(PropertyName)?.GetValue(model, null))
             {
-                return new ValidationResult(GetErrorMessage());
+                return new ValidationResult(GetErrorMessage(), new[] { validationContext.MemberName ?? string.Empty });
             }
 
             return ValidationResult.Success;
