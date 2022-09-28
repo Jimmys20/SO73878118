@@ -1,0 +1,34 @@
+﻿@page "/"
+@using SO73878118.Data
+
+<PageTitle>Index</PageTitle>
+
+<EditForm Model="@dateTimeModel" OnInvalidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div style="padding-top:10px" class="col-md-4">
+        <label>
+            From Date:
+            <InputDate @bind-Value="dateTimeModel.FromDate" />
+        </label>
+        <ValidationMessage For="@(() => dateTimeModel.FromDate)" />
+    </div>
+
+    <div style="padding-top:10px" class="col-md-4">
+        <label>
+            To Date:
+            <InputDate @bind-Value="dateTimeModel.ToDate" />
+        </label>
+        <ValidationMessage For="@(() => dateTimeModel.ToDate)" />
+    </div>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    DateTimeModel dateTimeModel = new();
+
+    private void HandleValidSubmit()
+    {      
+    }
+}
