@@ -4,9 +4,11 @@ namespace SO73878118.Data
 {
     public class DateTimeModel : IValidatableObject
     {
+        [Required]
         [DataType(DataType.Date)]
         public DateTime? FromDate { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         public DateTime? ToDate { get; set; }
 
