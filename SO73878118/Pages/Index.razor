@@ -6,36 +6,36 @@
 <EditForm EditContext="editContext" OnInvalidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
 
-    <div style="padding-top:10px" class="col-md-4">
+    <p>
         <label>
             Name:
             <InputText @bind-Value="dateTimeModel.Name" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.Name)" />
-    </div>
+    </p>
 
-    <div style="padding-top:10px" class="col-md-4">
+    <p>
         <label>
             From Date:
             <InputDate @bind-Value="dateTimeModel.FromDate" @onfocusout="HandleFromDateFocusOut" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.FromDate)" />
-    </div>
+    </p>
 
-    <div style="padding-top:10px" class="col-md-4">
+    <p>
         <label>
             To Date:
             <InputDate @bind-Value="dateTimeModel.ToDate" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.ToDate)" />
-    </div>
+    </p>
 
     <button type="submit">Submit</button>
 </EditForm>
 
 @code {
-    EditContext? editContext;
-    DateTimeModel dateTimeModel = new();
+    private EditContext? editContext;
+    private DateTimeModel dateTimeModel = new();
 
     protected override void OnInitialized()
     {
