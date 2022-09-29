@@ -3,7 +3,7 @@
 
 <PageTitle>Index</PageTitle>
 
-<EditForm EditContext="editContext" OnInvalidSubmit="@HandleValidSubmit">
+<EditForm Model="dateTimeModel" OnInvalidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -18,10 +18,7 @@
     <p>
         <label>
             From Date:
-            <InputDate TValue="DateTime?"
-                       Value="dateTimeModel.FromDate"
-                       ValueChanged="HandleFromDateChanged"
-                       ValueExpression="() => dateTimeModel.FromDate" />
+            <InputDate @bind-Value="dateTimeModel.FromDate" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.FromDate)" />
     </p>
@@ -29,10 +26,7 @@
     <p>
         <label>
             To Date:
-            <InputDate TValue="DateTime?"
-                       Value="dateTimeModel.ToDate"
-                       ValueChanged="HandleToDateChanged"
-                       ValueExpression="() => dateTimeModel.ToDate" />
+            <InputDate @bind-Value="dateTimeModel.ToDate" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.ToDate)" />
     </p>
@@ -41,35 +35,35 @@
 </EditForm>
 
 @code {
-    private EditContext? editContext;
+    //private EditContext? editContext;
     private DateTimeModel dateTimeModel = new();
 
-    protected override void OnInitialized()
-    {
-        editContext = new EditContext(dateTimeModel);
-    }
+    //protected override void OnInitialized()
+    //{
+    //    editContext = new EditContext(dateTimeModel);
+    //}
 
-    private void HandleFromDateChanged(DateTime? fromDate)
-    {
-        dateTimeModel.FromDate = fromDate;
+    //private void HandleFromDateChanged(DateTime? fromDate)
+    //{
+    //    dateTimeModel.FromDate = fromDate;
 
-        if (editContext != null && dateTimeModel.ToDate != null)
-        {
-            FieldIdentifier toDateField = editContext.Field(nameof(DateTimeModel.ToDate));
-            editContext.NotifyFieldChanged(toDateField);
-        }
-    }
+    //    if (editContext != null && dateTimeModel.ToDate != null)
+    //    {
+    //        FieldIdentifier toDateField = editContext.Field(nameof(DateTimeModel.ToDate));
+    //        editContext.NotifyFieldChanged(toDateField);
+    //    }
+    //}
 
-    private void HandleToDateChanged(DateTime? toDate)
-    {
-        dateTimeModel.ToDate = toDate;
+    //private void HandleToDateChanged(DateTime? toDate)
+    //{
+    //    dateTimeModel.ToDate = toDate;
 
-        if (editContext != null && dateTimeModel.FromDate != null)
-        {
-            FieldIdentifier fromDateField = editContext.Field(nameof(DateTimeModel.FromDate));
-            editContext.NotifyFieldChanged(fromDateField);
-        }
-    }
+    //    if (editContext != null && dateTimeModel.FromDate != null)
+    //    {
+    //        FieldIdentifier fromDateField = editContext.Field(nameof(DateTimeModel.FromDate));
+    //        editContext.NotifyFieldChanged(fromDateField);
+    //    }
+    //}
 
     private void HandleValidSubmit()
     {
