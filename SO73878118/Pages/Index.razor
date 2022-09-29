@@ -3,7 +3,7 @@
 
 <PageTitle>Index</PageTitle>
 
-<EditForm Model="@dateTimeModel" OnInvalidSubmit="@HandleValidSubmit">
+<EditForm EditContext="editContext" OnInvalidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
 
     <div style="padding-top:10px" class="col-md-4">
@@ -17,7 +17,7 @@
     <div style="padding-top:10px" class="col-md-4">
         <label>
             From Date:
-            <InputDate @bind-Value="dateTimeModel.FromDate" />
+            <InputDate @bind-Value="dateTimeModel.FromDate" @onfocusout="HandleFromDateFocusOut" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.FromDate)" />
     </div>
@@ -34,9 +34,24 @@
 </EditForm>
 
 @code {
+    EditContext? editContext;
     DateTimeModel dateTimeModel = new();
 
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(dateTimeModel);
+    }
+
+    private void HandleFromDateFocusOut()
+    {
+        if (editContext != null && dateTimeModel.ToDate != null)
+        {
+            FieldIdentifier toDateField = editContext.Field(nameof(DateTimeModel.ToDate));
+            editContext.NotifyFieldChanged(toDateField);
+        }
+    }
+
     private void HandleValidSubmit()
-    {      
+    {
     }
 }
