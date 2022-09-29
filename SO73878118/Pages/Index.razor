@@ -29,7 +29,10 @@
     <p>
         <label>
             To Date:
-            <InputDate @bind-Value="dateTimeModel.ToDate" />
+            <InputDate TValue="DateTime?"
+                       Value="dateTimeModel.ToDate"
+                       ValueChanged="HandleToDateChanged"
+                       ValueExpression="() => dateTimeModel.ToDate" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.ToDate)" />
     </p>
@@ -54,6 +57,17 @@
         {
             FieldIdentifier toDateField = editContext.Field(nameof(DateTimeModel.ToDate));
             editContext.NotifyFieldChanged(toDateField);
+        }
+    }
+
+    private void HandleToDateChanged(DateTime? toDate)
+    {
+        dateTimeModel.ToDate = toDate;
+
+        if (editContext != null && dateTimeModel.FromDate != null)
+        {
+            FieldIdentifier fromDateField = editContext.Field(nameof(DateTimeModel.FromDate));
+            editContext.NotifyFieldChanged(fromDateField);
         }
     }
 

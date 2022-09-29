@@ -8,12 +8,13 @@ namespace SO73878118.Data
         public string? Name { get; set; }
 
         [Required]
+        [DateMustBeBefore(nameof(ToDate))]
         [DataType(DataType.Date)]
         public DateTime? FromDate { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         [DateMustBeAfter(nameof(FromDate))]
+        [DataType(DataType.Date)]     
         public DateTime? ToDate { get; set; }
 
         //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
