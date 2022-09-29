@@ -17,7 +17,10 @@
     <p>
         <label>
             From Date:
-            <InputDate @bind-Value="dateTimeModel.FromDate" @onfocusout="HandleFromDateFocusOut" />
+            <InputDate TValue="DateTime?"
+                       Value="dateTimeModel.FromDate"
+                       ValueChanged="HandleFromDateChanged"
+                       ValueExpression="() => dateTimeModel.FromDate" />
         </label>
         <ValidationMessage For="@(() => dateTimeModel.FromDate)" />
     </p>
@@ -42,8 +45,10 @@
         editContext = new EditContext(dateTimeModel);
     }
 
-    private void HandleFromDateFocusOut()
+    private void HandleFromDateChanged(DateTime? fromDate)
     {
+        dateTimeModel.FromDate = fromDate;
+
         if (editContext != null && dateTimeModel.ToDate != null)
         {
             FieldIdentifier toDateField = editContext.Field(nameof(DateTimeModel.ToDate));
