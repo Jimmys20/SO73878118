@@ -2,6 +2,7 @@
 
 namespace SO73878118.Data
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class DateMustBeBeforeAttribute : ValidationAttribute
     {
         public DateMustBeBeforeAttribute(string targetPropertyName)
