@@ -15,7 +15,7 @@ namespace SO73878118.Data
         protected override ValidationResult? IsValid(
             object? value, ValidationContext validationContext)
         {
-            var model = (DateTimeModel)validationContext.ObjectInstance;
+            var model = validationContext.ObjectInstance;
 
             if ((DateTime?)value > (DateTime?)model.GetType().GetProperty(PropertyName)?.GetValue(model, null))
             {
