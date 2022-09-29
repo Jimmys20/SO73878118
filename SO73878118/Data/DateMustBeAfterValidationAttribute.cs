@@ -4,23 +4,26 @@ namespace SO73878118.Data
 {
     public class DateMustBeAfterAttribute : ValidationAttribute
     {
-        public DateMustBeAfterAttribute(string propertyName)
-            => PropertyName = propertyName;
+        public DateMustBeAfterAttribute(string targetPropertyName)
+            => TargetPropertyName = targetPropertyName;
 
-        public string PropertyName { get; }
+        public string TargetPropertyName { get; }
 
-        public string GetErrorMessage(string valueName) =>
-            $"'{valueName}' must be after '{PropertyName}'.";
+        public string GetErrorMessage(string propertyName) =>
+            $"'{propertyName}' must be after '{TargetPropertyName}'.";
 
         protected override ValidationResult? IsValid(
             object? value, ValidationContext validationContext)
         {
-            var model = validationContext.ObjectInstance;
-
-            if ((DateTime?)value < (DateTime?)model.GetType().GetProperty(PropertyName)?.GetValue(model, null))
+            var targetValue = validationContext.ObjectInstance
+                .GetType()
+                .GetProperty(TargetPropertyName)
+                ?.GetValue(validationContext.ObjectInstance, null);
+            
+            if ((DateTime?)value < (DateTime?)targetValue)
             {
-                var valueName = validationContext.MemberName ?? string.Empty;
-                return new ValidationResult(GetErrorMessage(valueName), new[] { valueName });
+                var propertyName = validationContext.MemberName ?? string.Empty;
+                return new ValidationResult(GetErrorMessage(propertyName), new[] { propertyName });
             }
 
             return ValidationResult.Success;
